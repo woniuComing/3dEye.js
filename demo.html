@@ -10,6 +10,16 @@
         margin: 0;
     }
 
+    body {
+        /* cursor: url("img/openhand1.png"), auto; */
+    }
+
+    .big_box {
+        width: 500px;
+        height: 500px;
+        margin: 200px auto;
+    }
+
     .box {
         width: 1000px;
         height: 447px;
@@ -20,14 +30,70 @@
         display: none;
     }
     </style>
-    <script src='js/query.js'></script>
-    <script src='js/3deye.min.js'></script>
+    <script src='query.js'></script>
+    <script src='index.js'></script>
 </head>
 
 <body>
     <div class="box" id='myCar'></div>
+    <!-- <ul>
+        <li>
+            <img src="images/1.png" alt="">
+            <img src="images/2.png" alt="">
+            <img src="images/3.png" alt="">
+            <img src="images/4.png" alt="">
+            <img src="images/5.png" alt="">
+            <img src="images/6.png" alt="">
+            <img src="images/7.png" alt="">
+            <img src="images/8.png" alt="">
+            <img src="images/9.png" alt="">
+            <img src="images/10.png" alt="">
+            <img src="images/11.png" alt="">
+            <img src="images/12.png" alt="">
+            <img src="images/13.png" alt="">
+            <img src="images/14.png" alt="">
+            <img src="images/15.png" alt="">
+            <img src="images/16.png" alt="">
+            <img src="images/17.png" alt="">
+            <img src="images/18.png" alt="">
+            <img src="images/19.png" alt="">
+            <img src="images/20.png" alt="">
+            <img src="images/21.png" alt="">
+            <img src="images/22.png" alt="">
+            <img src="images/23.png" alt="">
+            <img src="images/24.png" alt="">
+            <img src="images/25.png" alt="">
+            <img src="images/26.png" alt="">
+            <img src="images/27.png" alt="">
+            <img src="images/28.png" alt="">
+            <img src="images/29.png" alt="">
+            <img src="images/30.png" alt="">
+            <img src="images/31.png" alt="">
+            <img src="images/32.png" alt="">
+            <img src="images/33.png" alt="">
+            <img src="images/34.png" alt="">
+            <img src="images/35.png" alt="">
+            <img src="images/36.png" alt="">
+            <img src="images/37.png" alt="">
+            <img src="images/38.png" alt="">
+            <img src="images/39.png" alt="">
+            <img src="images/40.png" alt="">
+            <img src="images/41.png" alt="">
+            <img src="images/42.png" alt="">
+            <img src="images/43.png" alt="">
+            <img src="images/44.png" alt="">
+            <img src="images/45.png" alt="">
+            <img src="images/46.png" alt="">
+            <img src="images/47.png" alt="">
+            <img src="images/48.png" alt="">
+            <img src="images/49.png" alt="">
+            <img src="images/50.png" alt="">
+            <img src="images/51.png" alt="">
+        </li>
+    </ul> -->
     <script>
     $(document).ready(function() {
+
         $("#myCar").vc3dEye({
             imagePath: "images/",
             totalImages: 51,
@@ -35,6 +101,121 @@
         });
 
     });
+    // move();
+
+    // clickBox();
+
+    //鼠标按下且移动时触发，   
+
+    function move() {
+        var body = document.querySelector("body");
+        var box = document.querySelector(".box");
+        // var xNum = document.querySelector(".xNum");
+        // var yNum = document.querySelector(".yNum");
+        var x = 0,
+            y = 0,
+            z = 0;
+        var xx = 0,
+            yy = 0;
+        var dis = 0;
+        var count = 0;
+        var xArr = [],
+            yArr = [];
+        var aa = 0,
+            bb = 0,
+            cc = 0,
+            dd = 0,
+            ee = 0,
+            ff = 0;
+        window.onmousedown = function(e) {
+            // console.log('mousedown',e.clientX,e.clientY);
+            //鼠标按下事件   
+            // body.style.cursor = 'url("img/closedhand1.png"),auto';
+            xArr[0] = e.clientX / 2; //获取鼠标点击屏幕时的坐标   
+            yArr[0] = e.clientY / 2;
+            aa = e.clientX;
+            bb = e.clientY;
+            window.onmousemove = function(e) { //鼠标移动事件————当鼠标按下且移动时触发  
+                // console.log('mousemove',e.clientX,e.clientY); 
+                xArr[1] = e.clientX / 2; //获取鼠标移动时第一个点的坐标   
+                yArr[1] = e.clientY / 2;
+                cc = e.clientX;
+                dd = e.clientY;
+                yy += xArr[1] - xArr[0]; //获得鼠标移动的距离   
+                xx += yArr[1] - yArr[0];
+                // ee += cc-aa;
+                // ff += dd-bb;
+                console.log('当前点击和上一次的点击之差', xArr[1] - xArr[0]);
+                dis = Math.abs(yy);
+                console.log('yy', yy, dis);
+                if (dis > 360) {
+                    yy = 0;
+                }
+                if (xArr[1] - xArr[0] > 0) {
+                    console.log('鼠标向左');
+                    for (var i = 0; i < 51; i++) {
+                        if (7.2 * i < dis && dis < 7.2 * (i + 1)) {
+                            count = i;
+                            box.style.backgroundImage = `url('images/${count+1}.png')`
+                        }
+                    }
+                } else if (xArr[1] - xArr[0] < 0) {
+                    console.log('鼠标向右');
+                    for (var i = 51; i > 0; i--) {
+                        if (7.2 * i < dis && dis < 7.2 * (i + 1)) {
+                            console.log('i', i);
+                            box.style.backgroundImage = `url('images/${i+1}.png')`
+                        }
+                    }
+                }
+
+                // console.log(yy,xx);
+                // xNum.value = xx + "°"; //将所获得距离数字赋值给input显示旋转角度   
+                // yNum.value = yy + "°";
+                // //将旋转角度写入transform中   
+                // box.style.transform = "rotatex(" + xx + "deg) rotatey(" + yy + "deg) rotatez(0deg)scale3d(0.7,0.7,0.7)";
+                xArr[0] = e.clientX / 2;
+                yArr[0] = e.clientY / 2;
+            }
+
+        };
+        window.onmouseup = function() { //鼠标抬起事件————用于清除鼠标移动事件，   
+            // body.style.cursor = 'url("img/openhand1.png"),auto';
+            window.onmousemove = null;
+        }
+    }
+    //点击事件、负责立方体盒子的六面伸展   
+    // function clickBox() {
+    //     var btn = document.querySelector(".open");
+    //     var box = document.querySelector(".box");
+    //     var son = box.children;
+    //     var value = 0;
+    //     //存储立方体散开时的transform参数   
+    //     var arr0 = ["rotatey(-90deg) translatex(-100px)", "rotatey(90deg) translatex(100px)", "rotatex(90deg) translatey(-100px)", "rotatex(-90deg) translatey(100px)", "translatez(-100px)", "translatez(100px)"];
+    //     //存储立方体合并时的transform参数   
+    //     var arr1 = ["rotatey(-90deg) translatex(-100px)translatez(100px)", "rotatey(90deg) translatex(100px)translatez(100px)", "rotatex(90deg) translatey(-100px)translatez(100px)", "rotatex(-90deg) translatey(100px)translatez(100px)", "translatez(-200px)", "translatez(200px)"];
+    //     btn.onclick = function() {
+    //         if (value == 0) {
+    //             value = 1;
+    //             btn.value = "点击合并";
+    //             for (var i = 0; i < arr1.length; i++) {
+    //                 son[i].style.transform = arr1[i];
+    //                 console.log(son[i])
+    //             }
+    //         } else if (value == 1) {
+    //             value = 0;
+    //             btn.value = "点击散开";
+    //             for (var j = 0; j < arr0.length; j++) {
+    //                 son[j].style.transform = arr0[j];
+    //                 console.log(j);
+
+    //             }
+    //         }
+    //     };
+    // }
+    // 
+    console.log(-222);
+    console.log(Math.abs(-222));
     </script>
 </body>
 

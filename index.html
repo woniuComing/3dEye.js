@@ -9,7 +9,7 @@
 			margin: 0;
 		}
 		.car {
-			background-color: red;
+			/* background-color: red; */
 			width: 1000px;
 			height: 447px;
 			background-image: url('images/1.png');
@@ -78,10 +78,10 @@
     </ul>
 	<script>
 		var picNum = 1,
-			totalPicNum = 51;
+		    totalPicNum = 51; //图片的总个数
 		var flag = false;
-		var prePosition = 0,
-			nowPosition = 0;
+		var prePosition = 0, //上一点的位置
+		    nowPosition = 0; //当前点的位置
 		var offsetLeft = document.getElementById('car').offsetLeft;
 		window.onmousedown = function(){
 			flag = true;
@@ -101,11 +101,15 @@
 		function changePic(nowPosition){
 			console.log(picNum,prePosition,nowPosition,prePosition - nowPosition)
 			if(prePosition - nowPosition > 25){
+                        //25为一个自定义的值，当鼠标移动距离大于25px时，切换图片
+                        //切换图片之后，把当前位置赋值给上次的位置
 				prePosition = nowPosition;
+                        //图片个数小于1的时候，变成最后一张图
 				picNum = --picNum < 1 ? totalPicNum:picNum;
 				document.getElementById('car').style.backgroundImage=`url(images/${picNum}.png)`
 			}else if(prePosition - nowPosition < -25){
 				prePosition = nowPosition;
+                        //图片个数大于最后一张图的时候，变成第一张图
 				picNum = ++picNum > totalPicNum?1:picNum;
 				document.getElementById('car').style.backgroundImage=`url(images/${picNum}.png)`
 			}

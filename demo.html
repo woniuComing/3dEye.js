@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .box {
+        width: 1000px;
+        height: 447px;
+        background-image: url('images/1.png');
+    }
+
+    img {
+        display: none;
+    }
+    </style>
+    <script src='js/query.js'></script>
+    <script src='js/3deye.min.js'></script>
+</head>
+
+<body>
+    <div class="box" id='myCar'></div>
+    <script>
+    $(document).ready(function() {
+        $("#myCar").vc3dEye({
+            imagePath: "images/",
+            totalImages: 51,
+            imageExtension: "png"
+        });
+
+    });
+    </script>
+</body>
+
+</html>
